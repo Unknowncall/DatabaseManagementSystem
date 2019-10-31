@@ -251,6 +251,10 @@
             include('views/rtsearch.php');
             break;
         default:
+
+            $sql = "SELECT name, city, country FROM `airports` LIMIT 10";
+            $dataList = getAllRecords($sql, $db, null);
+
             include("views/homepage.php");
             break;
     }
