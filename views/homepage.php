@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="column paragraph" style="float:left">
 			<center><h1>Airport Database</h1></center>
-			<p>Welcome to our Database Managment Systems project. This was developed by 3 students at Whitewater Wisconsin, Zach Harvey, Ryan {LASTNAME}, and Jake {LASTNAME}. This project was made strictly for education purposes. Our data was collected from <a href="http://www.openflights.org/" target="_blank">openflights.org</a>.</p>
+			<p>Welcome to our Database Managment Systems project. This was developed by 3 students at Whitewater Wisconsin, Zach Harvey, Ryan Beatty, and Jake {LASTNAME}. This project was made strictly for education purposes. Our data was collected from <a href="http://www.openflights.org/" target="_blank">openflights.org</a>.</p>
 		</div>
 		<div class="column top_airports">
 			<center>
@@ -24,11 +24,15 @@
 						$sql2 = "SELECT name, city FROM `airports` WHERE airport_id = {$airportSelection}";
 						$data2 = getOneRecord($sql2, $db, null);
 						$name = $data2['name'];
+						$modifiedname = str_replace("_", '\'', $data2['name']);
 						$city = $data2['city'];
 					}
 
 
-			echo "<table><tr> <td>{$modifiedname},<td><td>{$city}</td><td><form action='index.php?viewer=airport&name={$name}' method='post'><button class='btn btn-success'>View</button></form></td></tr></table>";
+			echo "<table>";
+			echo "<tr><td><a href='index.php?viewer=airport&name={$name}'/>{$modifiedname},<td><td><a href='index.php?viewer=airport&name={$name}'/>{$city}</td>";
+			echo "</tr>";
+			echo "</table>";
 			
 		}
 		?>
