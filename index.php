@@ -18,9 +18,9 @@
                 $plane = $_GET['name'];
             }
 
-            $sql = "SELECT * FROM `planes` WHERE name = '{$plane}'";
-
-            $dataList = getOneRecord($sql, $db, null);
+            $sql = "SELECT * FROM `planes` WHERE name = :plane";
+            $parameters = array(':plane' => $plane);
+            $dataList = getOneRecord($sql, $db, $parameters);
 
             $name = $dataList['name'];
             $iata = $dataList['iata'];
@@ -37,8 +37,9 @@
             }
 
 
-            $sql = "SELECT * FROM `airports` WHERE name = '{$airport}'";
-            $dataList = getOneRecord($sql, $db, null);
+            $sql = "SELECT * FROM `airports` WHERE name = :airport";
+            $parameters = array(':airport' => $airport);
+            $dataList = getOneRecord($sql, $db, $parameters);
 
             $name = $dataList['name'];
             $name = str_replace("_", "'", $name);
@@ -62,8 +63,9 @@
                 $routeId = $_GET['id'];
             }
 
-            $sql = "SELECT * FROM `routes` WHERE `id` = {$routeId}";
-            $dataList = getOneRecord($sql, $db, null);
+            $sql = "SELECT * FROM `routes` WHERE `id` = :id";
+            $parameters = array(':id' => $routeId);
+            $dataList = getOneRecord($sql, $db, $parameters);
 
             $airline_id = $dataList['airline_id'];
             $source_airport_id= $dataList['source_airport_id'];
@@ -82,9 +84,9 @@
                 $airline = $_GET['name'];
             }
 
-            $sql = "SELECT * FROM `airlines` WHERE name = '{$airline}'";
-
-            $dataList = getOneRecord($sql, $db, null);
+            $sql = "SELECT * FROM `airlines` WHERE name = :airline";
+            $parameters = array(':airline' => $airline);
+            $dataList = getOneRecord($sql, $db, $parameters);
 
             $name = $dataList['name'];
             $alias = $dataList['alias'];
@@ -118,7 +120,7 @@
             $name = '';
             $city = '';
             $country = '';
-            $show = '';
+            $show = 0;
             
             if(isset($_POST['airport'])){$name = $_POST['airport'];}
             if(isset($_GET['airport'])) {$name = $_GET['airport'];}
@@ -132,6 +134,13 @@
             if(isset($_GET['show'])){$show = $_GET['show'];} else { $show = 10;}
 
             $modifiedname = str_replace('\'','_',$name);
+            
+            // Total number of rows, used for whether or not "show more" button appears
+            $result = $db->prepare("SELECT name FROM `airports` WHERE name LIKE '%{$modifiedname}%' AND city LIKE '%{$city}%' AND country LIKE '%{$country}%'");
+            $result->execute();
+            $num_of_rows = $result->rowCount();
+            $count = $num_of_rows;
+            
             $sql = "SELECT name FROM `airports` WHERE name LIKE '%{$modifiedname}%' AND city LIKE '%{$city}%' AND country LIKE '%{$country}%' LIMIT {$show}"; 
             $dataList = getAllRecords($sql, $db, null);
 
@@ -157,6 +166,12 @@
             if(isset($_GET['show'])){$show = $_GET['show'];} else { $show = 10;}
             
             $modifiedname = str_replace('\'','_',$name);
+            
+            $result = $db->prepare("SELECT name FROM `airlines` WHERE name LIKE '%{$modifiedname}%' AND callsign LIKE '%{$callsign}%' AND country LIKE '%{$country}%'");
+            $result->execute();
+            $num_of_rows = $result->rowCount();
+            $count = $num_of_rows;
+            
             $sql = "SELECT name FROM `airlines` WHERE name LIKE '%{$modifiedname}%' AND callsign LIKE '%{$callsign}%' AND country LIKE '%{$country}%' LIMIT {$show}";
 
             $dataList = getAllRecords($sql, $db, null);
@@ -170,13 +185,18 @@
         case 'planeresults':
 
             $name = '';
-            $show = '';
+            $show = 0;
 
             if (isset($_POST['planename'])) {$name = $_POST['planename'];}
             if(isset($_GET['name'])){$name = $_GET['name'];}
 
             if(isset($_GET['show'])){$show = $_GET['show'];} else { $show = 10;}
-
+            
+            $result = $db->prepare("SELECT name FROM `planes` WHERE name LIKE '%{$name}%'");
+            $result->execute();
+            $num_of_rows = $result->rowCount();
+            $count = $num_of_rows;
+            
             $sql = "SELECT name FROM `planes` WHERE name LIKE '%{$name}%' LIMIT {$show}";
 
             $dataList = getAllRecords($sql, $db, null);
@@ -193,27 +213,28 @@
                     $_SESSION['email'] = $data['email'];
                     ?>
                 <script type="text/javascript">
-                        window.location.href = 'index.php';
+                    window.location.href = 'index.php?mode=profilepage';
                 </script>
+
                 <?php
                 }else{
                 ?>
                     <script type="text/javascript">
-                            window.location.href = 'index.php';
+                        window.location.href = 'index.php';
                     </script>
                 <?php
                 }
             }else{
                 ?>
                 <script type="text/javascript">
-                        window.location.href = 'index.php';
+                    window.location.href = 'index.php';
                 </script>
                 <?php
             }
 
             break;
             
-        case 'logout' :
+        case 'logout':
                 session_destroy();
                 setcookie(session_name(), '', time()-1000, '/');
                 $_SESSION = array();
@@ -234,7 +255,7 @@
 
             $depart = '';
             $arrive = '';
-            $show = '';
+            $show = 0;
 
             if (isset($_POST['depart'])) {$depart = $_POST['depart'];}
             if (isset($_GET['depart'])) {$depart = $_GET['depart'];}
@@ -243,6 +264,11 @@
             if (isset($_GET['arriving'])) {$arrive = $_GET['arriving'];}
 
             if(isset($_GET['show'])){$show = $_GET['show'];} else { $show = 10;}
+            
+            $result = $db->prepare("SELECT a.name, r.source_airport, r.destination_airport, r.id FROM routes r, airlines a WHERE r.source_airport LIKE '{$depart}' AND r.destination_airport LIKE '{$arrive}' AND r.airline_id = a.id");
+            $result->execute();
+            $num_of_rows = $result->rowCount();
+            $count = $num_of_rows;
 
             $sql = "SELECT a.name, r.source_airport, r.destination_airport, r.id FROM routes r, airlines a WHERE r.source_airport LIKE '{$depart}' AND r.destination_airport LIKE '{$arrive}' AND r.airline_id = a.id LIMIT {$show}";
 
@@ -251,11 +277,8 @@
             include('views/rtsearch.php');
             break;
         default:
-
-            $sql = "SELECT name, city, country FROM `airports` LIMIT 10";
-            $dataList = getAllRecords($sql, $db, null);
-
-            include("views/homepage.php");
+            echo "<center><h1>Airport Database</h1>";
+            echo "<p>This is built by Zachary Harvey, Ryan, and Jake for school. This is for the fall semester 2019 at Whitewater Wisconsin.</p></center>";
             break;
     }
 }
