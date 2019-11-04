@@ -1,7 +1,7 @@
 <div class="container">
     <table class="table table-striped">
         <tr>
-            <td>Name</td>
+            <td>Name - Name</td>
             <td>City</td>
             <td>Country</td>
             <td>Timezone</td>
