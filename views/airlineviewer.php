@@ -2,13 +2,13 @@
     <form action="index.php?mode=airlinesearch" method="post">
     <table class="table table-striped">
         <tr>
-            <td>Name</td>
-            <td>Alias</td>
-            <td>IATA</td>
-            <td>ICAO</td>
+            <th>Name</th>
+            <th>Alias</th>
+            <th>IATA</th>
+            <th>ICAO</th>
         </tr>
         <?php
-            $stringAlias = ($alias = 'N' ? 'N/a' : $alias);
+            $stringAlias = ($alias = 'N' ? 'N/A' : $alias);
 
             echo "<tr>";
                     echo "<td> {$name} </td>";
@@ -17,13 +17,10 @@
                     echo "<td> {$icao} </td>";
             echo "</tr>";
         ?>
-    </table>
-
-    <table class="table table-striped">
         <tr>
-            <td>Callsign</td>
-            <td>Country</td>
-            <td>Active</td>
+            <th>Callsign</th>
+            <th>Country</th>
+            <th colspan="2">Active</th>
         </tr>
         <?php
             $stringActive = ($active = 1 ? 'True' : 'False');
@@ -31,7 +28,7 @@
             echo "<tr>";
                     echo "<td> {$callsign} </td>";
                     echo "<td> {$country} </td>";
-                    echo "<td> {$stringActive} </td>";
+                    echo "<td colspan='2'> {$stringActive} </td>";
             echo "</tr>";
         ?>
 

@@ -2,9 +2,9 @@
     <form action="index.php?mode=airplanesearch" method="post">
     <table class="table table-striped">
         <tr>
-            <td>Name</td>
-            <td>IATA</td>
-            <td>ICAO</td>
+            <th>Name</th>
+            <th>IATA</th>
+            <th>ICAO</th>
         </tr>
         <?php
             echo "<tr>";

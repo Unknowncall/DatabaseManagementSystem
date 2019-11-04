@@ -1,9 +1,9 @@
 <div class="container">
     <table class="table table-striped">
         <tr>
-            <td>Source Airport</td>
-            <td>Destination Airport</td>
-            <td>Airline</td>
+            <th>Source Airport</th>
+            <th>Destination Airport</th>
+            <th>Airline</th>
         </tr>
         <?php
             $dataList = getOneRecord("SELECT `name` FROM `airlines` WHERE id = {$airline_id}", $db, null);
@@ -18,18 +18,16 @@
             $dest_fixed = str_replace("_", "'", $destData['name']);
 
             echo "<tr>";
-                    echo "<td> {$source_fixed} <form action='index.php?viewer=airport&name={$source_airport_name}&fromroute=true' method='post'> <button class='btn btn-success' style='float:right' type='submit'>View</button> </form> </td>";
-                    echo "<td> {$dest_fixed} <form action='index.php?viewer=airport&name={$destination_airport_name}&fromroute=true' method='post'> <button class='btn btn-success' style='float:right' type='submit'>View</button> </form> </td>";
+                    echo "<td><a href='index.php?viewer=airport&name={$source_airport_name}&fromroute=true'>{$source_fixed}</a></td>";
+                    echo "<td><a href='index.php?viewer=airport&name={$destination_airport_name}&fromroute=true'>{$dest_fixed}</a></td>";
                     echo "<td> {$airline_name} </td>";
             echo "</tr>";
         ?>
-    </table>
-
-    <table class="table table-striped">
+        
         <tr>
-            <td>Codeshare</td>
-            <td>Stops</td>
-            <td>Equipment</td>
+            <th>Codeshare</th>
+            <th>Stops</th>
+            <th>Equipment</th>
         </tr>
         <?php
             echo "<tr>";

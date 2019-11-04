@@ -9,22 +9,26 @@
                 foreach($dataList as $ap){
                     $newName = $ap['name'];
                     $modifiedname = str_replace("_", '\'', $ap['name']);
-                    echo "<form action='index.php?viewer=airline&name={$newName}' method='post'>";
                     echo '<tr>';
-                    echo "<td> {$modifiedname} </td>";
-                    echo "<td><button class='btn btn-success' type='submit'>View</button></td></tr></form>";
+                    echo "<td colspan='2'><a style='display:block;' href='index.php?viewer=airline&name={$newName}'> {$modifiedname} </a></td>";
+                    echo "</tr>";
+                    $count--;
+                }
+        ?>
+        <form action="index.php?mode=airlinesearch" method="post">
+            <tr><td><button class='btn btn-success' type='submit'>Search</button></td>
+        </form>
+        <?php
+                if($num_of_rows > 10 && $count != 0){
+                    $show = $show + 10;
+                    echo "<form action='index.php?mode=airsearch&show={$show}&airline={$name}&callsign={$callsign}&country={$country}' method='post'>";
+                    echo "<td><button class='btn btn-success' type='submit' style='float:right'>Show More</button></td></tr>";
+                    echo "</form>";
+                }else{
+                    echo "<td></td></tr>";
                 }
             }
-            
-            $show = $show + 10;
-            echo "<form action='index.php?mode=airsearch&show={$show}&airline={$name}&callsign={$callsign}&country={$country}' method='post'>";
-            echo "<tr><td colspan='4'><button class='btn btn-success' type='submit' style='float:right'>Show More</button></td></tr>";
-            echo "</form>";
         ?>
-
-        <form action="index.php?mode=airlinesearch" method="post">
-            <tr><td colspan="4"><button class='btn btn-success' type='submit' style="float:right">Search</button></td></tr>
-        </form>
 
     </table>
 

@@ -6,7 +6,6 @@
         </tr>
         <?php
             if(isset($dataList)){
-
                 foreach ($dataList as $i) {
 
                     $airline = $i['name'];
@@ -14,20 +13,27 @@
                     $arriveoff = $i['destination_airport'];
                     $id = $i['id'];
 
-                    echo "<tr><form action='index.php?viewer=route&id={$id}' method='post'>";
-                    echo "<td> {$airline} - {$departoff} -> {$arriveoff} </td>";
-                    echo "<td><button class='btn btn-success' type='submit'>View</button></td></tr></form>";
+                    echo "<tr>";
+                    echo "<td colspan='2'><a style='display:block;' href='index.php?viewer=route&id={$id}'> {$airline} - {$departoff} -> {$arriveoff} </a></td>";
+                    echo "</tr>";
+                    $count--;
                 }
-
-            $show = $show + 10;
-            echo "<form action='index.php?mode=rtsearch&show={$show}&depart={$depart}&arriving={$arrive}' method='post'>";
-            echo "<tr><td colspan='4'><button class='btn btn-success' type='submit' style='float:right'>Show More</button></td></tr>";
-            echo "</form>";
-            }
         ?>
         <form action="index.php?mode=routesearch" method="post">
-            <tr><td colspan="4"><button class='btn btn-success' type='submit' style="float:right">Search</button></td></tr>
+            <tr><td><button class='btn btn-success' type='submit'>Search</button></td>
         </form>
+        
+        <?php
+                if($num_of_rows > 10 && $count != 0){
+                    $show = $show + 10;
+                    echo "<form action='index.php?mode=rtsearch&show={$show}&depart={$depart}&arriving={$arrive}' method='post'>";
+                    echo "<td><button class='btn btn-success' type='submit' style='float:right'>Show More</button></td></tr>";
+                    echo "</form>";
+                }else{
+                    echo "<td></td></tr>";
+                }
+            }
+        ?>
     </table>
 
 </div>

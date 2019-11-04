@@ -5,6 +5,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/09e46c79f6.js"></script>
+    <style>
+        th{
+            text-decoration: underline;
+        }
+        .directionsContainer{
+            width:380px;
+            height:600px;
+            overflow-y: auto;
+            float:left;
+            background-color: white;
+            margin-bottom: 20px;
+        }
+
+        #map{
+            position:relative;
+            width:calc(100% - 380px);
+            height:600px;
+            float:left;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -65,4 +85,3 @@
             </div>
         </nav>
     </header>
-    
