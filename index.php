@@ -66,7 +66,26 @@ switch ($review) {
             
             break;
     case 'airplane':
+        include('views/airplanereview.php');
         break;
+    case 'insert_airplane':
+
+        $rating = $_POST["rating"];
+        $id = '';
+        if (isset($_GET['id'])) {$id = $_GET['id'];}
+        $sql = "INSERT INTO `plane_reviews` (`name`, `rating`, `review_id`) VALUES ('{$id}', '{$rating}', NULL)";
+        executeSQL($sql, $db, null);
+
+            $sql        = "SELECT * FROM `planes` WHERE name = {$id}";
+            $dataList   = getOneRecord($sql, $db, null);
+            
+            $name = $dataList['name'];
+            $iata = $dataList['iata'];
+            $icao = $dataList['icao'];
+            
+            include("views/planeviewer.php");
+            
+            break;
     default:
         break;
 }
