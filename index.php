@@ -40,7 +40,30 @@ switch ($review) {
             
             include("views/airportviewer.php");
     case 'airline':
+        include('views/airlinereview.php');
         break;
+    case 'insert_airline':
+        $rating = $_POST["rating"];
+        $airlineid = '';
+        if (isset($_GET['id'])) {$airlineid = $_GET['id'];}
+        $sql = "INSERT INTO `airline_reviews` (`airline_id`, `rating`, `review_id`) VALUES ('{$airlineid}', '{$rating}', NULL)";
+        executeSQL($sql, $db, null);
+            
+            
+            $sql        = "SELECT * FROM `airlines` WHERE `id` = {$airlineid}";
+            $dataList   = getOneRecord($sql, $db, $parameters);
+            
+            $name     = $dataList['name'];
+            $alias    = $dataList['alias'];
+            $iata     = $dataList['iata'];
+            $icao     = $dataList['icao'];
+            $callsign = $dataList['callsign'];
+            $country  = $dataList['country'];
+            $active   = $dataList['active'];
+            
+            include("views/airlineviewer.php");
+            
+            break;
     case 'airplane':
         break;
     default:
