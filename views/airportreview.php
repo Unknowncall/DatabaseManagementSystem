@@ -77,44 +77,48 @@
 
         $data = getOneRecord($sql, $db, null);
         $name = $data['name'];
-      echo "<form class='rating'>";
+
+        echo "<form action='index.php?viewer=airport&name={$name}' method='post'>";
     ?>
-         <label>
-         <input type="radio" name="rating" value="1" />
-         <span class="icon">★</span>
-         </label>
-         <label>
-         <input type="radio" name="rating" value="2" />
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         </label>
-         <label>
-         <input type="radio" name="rating" value="3" />
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         <span class="icon">★</span>   
-         </label>
-         <label>
-         <input type="radio" name="rating" value="4" />
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         </label>
-         <label>
-         <input type="radio" name="rating" value="5" />
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         <span class="icon">★</span>
-         </label>
-      </form>
-        <?php
 
+         <label>
+            <input type="radio" name="rating" value="1" />
+            <span class="icon">★</span>
+        </label>
+         <label>
+            <input type="radio" name="rating" value="2" />
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+         </label>
+         <label>
+            <input type="radio" name="rating" value="3" />
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+            <span class="icon">★</span>   
+         </label>
+         <label>
+            <input type="radio" name="rating" value="4" />
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+         </label>
+         <label>
+            <input type="radio" name="rating" value="5" />
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+            <span class="icon">★</span>
+         </label>
 
-            $stars = '';
-            if(isset($_POST['rating'])){$stars = $_POST["rating"];}
+    <input class="btn btn-success" type="submit" name="submit" value="Get Selected Values" />
+</form>
+<?php
+    if (isset($_POST['submit'])) {
+        if(isset($_POST['rating'])){
+            $rating = '';
+            if(isset($_POST['rating'])){$rating = $_POST["rating"];}
             $id = '';
             if(isset($_GET['id'])){$id = $_GET["id"];}
             $id = '';
@@ -124,14 +128,10 @@
             $data = getOneRecord($sql, $db, null);
             $name = $data['name'];
 
-            echo "<form action='index.php?viewer=airport&name={$name}' style='padding:25px'>";
-            $sql = "INSERT INTO `airport_reviews` (`airport_id`, `rating`, `review_id`) VALUES ('{$id}', '{$stars}', NULL)";
+            $sql = "INSERT INTO `airport_reviews` (`airport_id`, `rating`, `review_id`) VALUES ('{$id}', '{$rating}', NULL)";
             executeSQL($sql, $db, null);
-
-                echo "<button class='btn btn-success' type='submit'>Submit Review</button>";
-            echo "</form>";
-        ?>
+        }
+    }
+?>
    </center>
-
-
 </div>
