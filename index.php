@@ -65,6 +65,7 @@ if ($review == '') {
             );
             $dataList   = getOneRecord($sql, $db, $parameters);
             
+            $id = $dataList['airport_id'];
             $name      = $dataList['name'];
             $name      = str_replace("_", "'", $name);
             $city      = $dataList['city'];

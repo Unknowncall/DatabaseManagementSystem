@@ -8,6 +8,12 @@
         return $result;
     }
 
+    function executeSQL($sql, $db, $parameter = null){
+        $statement = $db->prepare($sql);
+        $statement->execute($parameter);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
     function getAllRecords($sql, $db, $parameter = null){
         $statement = $db->prepare($sql);
         $statement->execute($parameter);
