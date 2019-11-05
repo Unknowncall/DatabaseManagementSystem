@@ -285,8 +285,7 @@
                 break;
             }
         default:
-            echo "<center><h1>Airport Database</h1>";
-            echo "<p>This is built by Zachary Harvey, Ryan, and Jake for school. This is for the fall semester 2019 at Whitewater Wisconsin.</p></center>";
+            include("views/homepage.php");
             break;
     }
 }
