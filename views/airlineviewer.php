@@ -31,7 +31,7 @@
             echo "</tr>";
 
             echo "<tr>";
-            echo "<form action='index.php?review=airline' method='post'>";
+            echo "<form action='index.php?review=airline&id={$id}' method='post'>";
             echo "<td colspan='1'><button class='btn btn-success' style='float:left' type='submit'>Leave Review</button></form>";
 
             echo "<form action='index.php?mode=airlinesearch' method='post'>";

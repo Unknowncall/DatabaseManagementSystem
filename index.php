@@ -51,8 +51,9 @@ switch ($review) {
             
             
             $sql        = "SELECT * FROM `airlines` WHERE `id` = {$airlineid}";
-            $dataList   = getOneRecord($sql, $db, $parameters);
+            $dataList   = getOneRecord($sql, $db, null);
             
+            $id = $dataList['id'];
             $name     = $dataList['name'];
             $alias    = $dataList['alias'];
             $iata     = $dataList['iata'];
@@ -163,6 +164,7 @@ if ($review == '') {
             );
             $dataList   = getOneRecord($sql, $db, $parameters);
             
+            $id = $dataList['id'];
             $name     = $dataList['name'];
             $alias    = $dataList['alias'];
             $iata     = $dataList['iata'];
