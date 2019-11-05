@@ -1,5 +1,4 @@
 <div class="container">
-    <form action="index.php?mode=airlinesearch" method="post">
     <table class="table table-striped">
         <tr>
             <th>Name</th>
@@ -30,9 +29,13 @@
                     echo "<td> {$country} </td>";
                     echo "<td colspan='2'> {$stringActive} </td>";
             echo "</tr>";
-        ?>
 
-        <tr><td colspan="4"><button class="btn btn-success" style="float:right" type="submit">Search Again</button></td></tr>
+            echo "<tr>";
+            echo "<form action='index.php?review=airline' method='post'>";
+            echo "<td colspan='1'><button class='btn btn-success' style='float:left' type='submit'>Leave Review</button></form>";
+
+            echo "<form action='index.php?mode=airlinesearch' method='post'>";
+            echo "<td colspan='4'><button class='btn btn-success' style='float:right' type='submit'>Search Again</button></td></tr></form>";
+        ?>
     </table>
-    </form>
 </div>
