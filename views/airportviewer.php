@@ -32,12 +32,18 @@
     
         <tr>
             <th>Altitude</th>
-            <th colspan="4">Region</th>
+            <th>Region</th>
+            <th colspan="4">Average Rating</th>
         </tr>
         <?php
             echo "<tr>";
                     echo "<td> {$altitude} ft. </td>";
-                    echo "<td colspan='4'> {$region} </td>";
+                    echo "<td> {$region} </td>";
+
+                    $ratingSQL = "SELECT AVG(rating) FROM `airport_reviews` WHERE airport_id = {$id}";
+                    $avg = getOneRecord($ratingSQL, $db, null);
+
+                    echo "<td colspan='4'> {$avg['rating']} ⭐</td>";
             echo "</tr>";
 
             echo "<tr>";
