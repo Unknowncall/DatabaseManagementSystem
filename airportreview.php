@@ -72,7 +72,7 @@
       }
    </style>
    <center>
-    <form>
+    <form action='views/insert_rating.php?id={$id}' method='post'>
          <label>
             <input type="radio" name="rating" value="1" />
             <span class="icon">★</span>
@@ -104,22 +104,7 @@
             <span class="icon">★</span>
          </label>
 
-    <input class="btn btn-success" type="submit" />
+    <input class="btn btn-success" type='submit' name='submit'/>
     </form>
-    <?php
-    if (isset($_POST['submit'])) {
-        if(isset($_POST['rating'])){
-
-            $rating = $_POST["rating"];
-            $id = '';
-            if(isset($_GET['id'])){$id = $_GET["id"];}
-
-            $sql = "INSERT INTO `airport_reviews` (`airport_id`, `rating`, `review_id`) VALUES ('{$id}', '{$rating}', NULL)";
-            executeSQL($sql, $db, null);
-
-            echo "localhost/project/index.php?viewer=airport&name={$name}";
-        }
-    }
-    ?>
    </center>
 </div>
