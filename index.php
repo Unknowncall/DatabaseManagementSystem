@@ -264,18 +264,26 @@
             if (isset($_GET['arriving'])) {$arrive = $_GET['arriving'];}
 
             if(isset($_GET['show'])){$show = $_GET['show'];} else { $show = 10;}
+
+            echo "<center>You must specify a departing and arriving airport.</center>";
+            if ($depart == "" || $arrive == "") {
+                include('views/routesearch.php');
+                break;
+            } else {
             
-            $result = $db->prepare("SELECT a.name, r.source_airport, r.destination_airport, r.id FROM routes r, airlines a WHERE r.source_airport LIKE '{$depart}' AND r.destination_airport LIKE '{$arrive}' AND r.airline_id = a.id");
-            $result->execute();
-            $num_of_rows = $result->rowCount();
-            $count = $num_of_rows;
+                $result = $db->prepare("SELECT a.name, r.source_airport, r.destination_airport, r.id FROM routes r, airlines a WHERE r.source_airport LIKE '{$depart}' AND r.destination_airport LIKE '{$arrive}' AND r.airline_id = a.id");
 
-            $sql = "SELECT a.name, r.source_airport, r.destination_airport, r.id FROM routes r, airlines a WHERE r.source_airport LIKE '{$depart}' AND r.destination_airport LIKE '{$arrive}' AND r.airline_id = a.id LIMIT {$show}";
+                $result->execute();
+                $num_of_rows = $result->rowCount();
+                $count = $num_of_rows;
 
-            $dataList = getAllRecords($sql, $db, null);
+                $sql = "SELECT a.name, r.source_airport, r.destination_airport, r.id FROM routes r, airlines a WHERE r.source_airport LIKE '{$depart}' AND r.destination_airport LIKE '{$arrive}' AND r.airline_id = a.id LIMIT {$show}";
+
+                $dataList = getAllRecords($sql, $db, null);
  
-            include('views/rtsearch.php');
-            break;
+                include('views/rtsearch.php');
+                break;
+            }
         default:
             echo "<center><h1>Airport Database</h1>";
             echo "<p>This is built by Zachary Harvey, Ryan, and Jake for school. This is for the fall semester 2019 at Whitewater Wisconsin.</p></center>";
