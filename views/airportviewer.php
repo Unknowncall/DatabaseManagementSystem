@@ -43,7 +43,9 @@
                     $ratingSQL = "SELECT AVG(rating) FROM `airport_reviews` WHERE airport_id = {$id}";
                     $avg = getOneRecord($ratingSQL, $db, null);
 
-                    echo "<td colspan='4'> {$avg['rating']} ⭐</td>";
+                    foreach($avg as $rating) {echo "<td colspan='4'> {$rating} ⭐</td>";}
+
+
             echo "</tr>";
 
             echo "<tr>";
