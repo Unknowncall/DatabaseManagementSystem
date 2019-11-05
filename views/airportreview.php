@@ -72,7 +72,10 @@
       }
    </style>
    <center>
-    <form action='views/insert_rating.php?id={$id}' method='post'>
+   <?php
+      echo "<form action='index.php?review=insert_airport&id={$id}' method='post'>";
+   ?>
+    
          <label>
             <input type="radio" name="rating" value="1" />
             <span class="icon">★</span>

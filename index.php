@@ -14,11 +14,34 @@ switch ($review) {
     case 'airport':
         include('views/airportreview.php');
         break;
+    case 'insert_airport':
+        $rating = $_POST["rating"];
+        $airportid = '';
+        if (isset($_GET['id'])) {$airportid = $_GET['id'];}
+        $sql = "INSERT INTO `airport_reviews` (`airport_id`, `rating`, `review_id`) VALUES ('{$airportid}', '{$rating}', NULL)";
+        executeSQL($sql, $db, null);
+            
+            
+            $sql = "SELECT * FROM `airports` WHERE airport_id = {$airportid}";
+            $dataList   = getOneRecord($sql, $db, null);
+            
+            $id = $dataList['airport_id'];
+            $name      = $dataList['name'];
+            $name      = str_replace("_", "'", $name);
+            $city      = $dataList['city'];
+            $country   = $dataList['country'];
+            $iata      = $dataList['iata'];
+            $icao      = $dataList['icao'];
+            $lattitude = $dataList['lattitude'];
+            $longitude = $dataList['longitude'];
+            $altitude  = $dataList['altitude'];
+            $timezone  = $dataList['timezone'];
+            $region    = $dataList['region'];
+            
+            include("views/airportviewer.php");
     case 'airline':
-        include('views/airlinereview.php');
         break;
     case 'airplane':
-        include('views/airplanereview.php');
         break;
     default:
         break;
@@ -59,7 +82,7 @@ if ($review == '') {
             }
             
             
-            $sql        = "SELECT * FROM `airports` WHERE name = :airport";
+            $sql = "SELECT * FROM `airports` WHERE name = :airport";
             $parameters = array(
                 ':airport' => $airport
             );
