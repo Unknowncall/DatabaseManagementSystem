@@ -19,7 +19,8 @@
         <tr>
             <th>Callsign</th>
             <th>Country</th>
-            <th colspan="2">Active</th>
+            <th>Active</th>
+            <th>Average Rating</th>
         </tr>
         <?php
             $stringActive = ($active = 1 ? 'True' : 'False');
@@ -27,7 +28,13 @@
             echo "<tr>";
                     echo "<td> {$callsign} </td>";
                     echo "<td> {$country} </td>";
-                    echo "<td colspan='2'> {$stringActive} </td>";
+                    echo "<td> {$stringActive} </td>";
+
+                   $ratingSQL = "SELECT AVG(rating) FROM `airline_reviews` WHERE airline_id = {$id}";
+                    $avg = getOneRecord($ratingSQL, $db, null);
+
+                    foreach($avg as $rating) {echo "<td> {$rating} ⭐</td>";}
+
             echo "</tr>";
 
             echo "<tr>";
