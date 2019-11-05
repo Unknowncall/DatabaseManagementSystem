@@ -40,12 +40,16 @@
                     echo "<td colspan='4'> {$region} </td>";
             echo "</tr>";
 
+            echo "<tr>";
+            echo "<form action='index.php?review=airport' method='post'>";
+            echo "<td colspan='1'><button class='btn btn-success' style='float:left' type='submit'>Leave Review</button></form>";
+
             if (isset($_GET['fromroute'])) {
                 echo "<form action='index.php?mode=routesearch' method='post'>";
             } else {
                 echo "<form action='index.php?mode=airportsearch' method='post'>";
             }
-            echo "<tr><td colspan='4'><button class='btn btn-success' style='float:right' type='submit'>Search Again</button></td></tr></form>";
+            echo "<td colspan='4'><button class='btn btn-success' style='float:right' type='submit'>Search Again</button></td></tr></form>";
 
         ?>
     </table>
