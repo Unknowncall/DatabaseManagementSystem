@@ -296,13 +296,13 @@ if ($viewer == '' && $review == '') {
             
             $modifiedname = str_replace('\'', '_', $name);
             
-            $result = $db->prepare("CALL getAirlineName('{$modifiedname}', '{$callsign}','{$country}',100000);");
+            $sqlcount = "CALL getAirlineName('{$modifiedname}', '{$callsign}','{$country}',100000);";
+            $result = $db->prepare($sqlcount);
             $result->execute();
             $num_of_rows = $result->rowCount();
             $count       = $num_of_rows;
             
             $sql = "CALL getAirlineName('{$modifiedname}','{$callsign}','{$country}',{$show});";
-            echo $sql;
             
             $dataList = getAllRecords($sql, $db, null);
             
