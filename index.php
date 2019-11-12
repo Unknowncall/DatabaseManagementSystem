@@ -296,12 +296,13 @@ if ($viewer == '' && $review == '') {
             
             $modifiedname = str_replace('\'', '_', $name);
             
-            $result = $db->prepare("SELECT name FROM `airlines` WHERE name LIKE '%{$modifiedname}%' AND callsign LIKE '%{$callsign}%' AND country LIKE '%{$country}%'");
+            $result = $db->prepare("CALL getAirlineName('{$modifiedname}', '{$callsign}','{$country}',100000);");
             $result->execute();
             $num_of_rows = $result->rowCount();
             $count       = $num_of_rows;
             
-            $sql = "SELECT name FROM `airlines` WHERE name LIKE '%{$modifiedname}%' AND callsign LIKE '%{$callsign}%' AND country LIKE '%{$country}%' LIMIT {$show}";
+            $sql = "CALL getAirlineName('{$modifiedname}','{$callsign}','{$country}',{$show});";
+            echo $sql;
             
             $dataList = getAllRecords($sql, $db, null);
             

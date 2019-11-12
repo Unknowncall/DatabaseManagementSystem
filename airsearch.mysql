@@ -1,0 +1,20 @@
+DELIMITER $$
+ 
+drop procedure if exists getAirlineName;
+CREATE PROCEDURE getAirlineName(
+	IN searchName VARCHAR(255),
+	IN callSignSearch VARCHAR(255),
+	IN countrySearch VARCHAR(255),
+	IN showLimit INT
+)
+
+BEGIN
+    SELECT name 
+    FROM `airlines` 
+    WHERE name LIKE CONCAT('%',searchName,'%')
+    AND callsign LIKE CONCAT('%',callSignSearch,'%')
+    AND country LIKE CONCAT('%',countrySearch,'%')
+    LIMIT showLimit;
+END $$
+ 
+DELIMITER ;
