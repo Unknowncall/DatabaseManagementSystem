@@ -3,6 +3,9 @@
     $user = 'harveyzt01';
     $pass = 'zh3844'; // first initial last initial last 4-digits of ID
     $db_info='mysql:host=washington.uww.edu;dbname=cs366-2197_harveyzt01';
+
+    $connection = mysqli_connect("washington.uww.edu", "harveyzt01", "zh3844", "cs366-2197_harveyzt01", "3306");
+
     try {
         $db = new PDO($db_info, $user, $pass);
 

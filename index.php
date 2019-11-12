@@ -303,6 +303,8 @@ if ($viewer == '' && $review == '') {
             $count       = $num_of_rows;
             
             $sql = "CALL getAirlineName('{$modifiedname}','{$callsign}','{$country}',{$show});";
+
+            $result = mysqli_query($connection, $sql);
             
             $dataList = getAllRecords($sql, $db, null);
             

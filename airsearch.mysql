@@ -9,7 +9,7 @@ CREATE PROCEDURE getAirlineName(
 )
 
 BEGIN
-    SELECT name 
+    SELECT `name` 
     FROM `airlines` 
     WHERE name LIKE CONCAT('%',searchName,'%')
     AND callsign LIKE CONCAT('%',callSignSearch,'%')
