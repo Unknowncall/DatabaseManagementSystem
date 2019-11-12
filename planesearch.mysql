@@ -1,0 +1,17 @@
+DELIMITER $$
+ 
+drop procedure if exists get;
+CREATE PROCEDURE getPlaneName(
+	IN searchName VARCHAR(255),
+	IN showLimit INT
+)
+
+BEGIN
+    SELECT `name`
+    FROM `planes` 
+    WHERE name
+    LIKE CONCAT('%',searchName,'%')
+    LIMIT showLimit;
+END $$
+ 
+DELIMITER ;

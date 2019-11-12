@@ -247,14 +247,17 @@ if ($viewer == '' && $review == '') {
             }
             
             $modifiedname = str_replace('\'', '_', $name);
-            
-            // Total number of rows, used for whether or not "show more" button appears
-            $result = $db->prepare("SELECT name FROM `airports` WHERE name LIKE '%{$modifiedname}%' AND city LIKE '%{$city}%' AND country LIKE '%{$country}%'");
+
+            $sqlcount = "CALL getAirportName('{$modifiedname}', '{$city}','{$country}',100000);";
+            $result = $db->prepare($sqlcount);
             $result->execute();
             $num_of_rows = $result->rowCount();
             $count       = $num_of_rows;
             
-            $sql      = "SELECT name FROM `airports` WHERE name LIKE '%{$modifiedname}%' AND city LIKE '%{$city}%' AND country LIKE '%{$country}%' LIMIT {$show}";
+            $sql = "CALL getAirportName('{$modifiedname}','{$city}','{$country}',{$show});";
+
+            $result = mysqli_query($connection, $sql);
+            
             $dataList = getAllRecords($sql, $db, null);
             
             include('views/apresults.php');
@@ -331,13 +334,16 @@ if ($viewer == '' && $review == '') {
             } else {
                 $show = 10;
             }
-            
-            $result = $db->prepare("SELECT name FROM `planes` WHERE name LIKE '%{$name}%'");
+
+            $sqlcount = "CALL getPlaneName('{$name}',100000);";
+            $result = $db->prepare($sqlcount);
             $result->execute();
             $num_of_rows = $result->rowCount();
             $count       = $num_of_rows;
             
-            $sql = "SELECT name FROM `planes` WHERE name LIKE '%{$name}%' LIMIT {$show}";
+            $sql = "CALL getPlaneName('{$name}',{$show});";
+
+            $result = mysqli_query($connection, $sql);
             
             $dataList = getAllRecords($sql, $db, null);
             

@@ -1,0 +1,21 @@
+DELIMITER $$
+ 
+drop procedure if exists getAirportName;
+CREATE PROCEDURE getAirportName(
+	IN searchName VARCHAR(255),
+	IN citySearch VARCHAR(255),
+	IN countrySearch VARCHAR(255),
+	IN showLimit INT
+)
+
+BEGIN
+    SELECT `name`
+    FROM `airports` 
+    WHERE name
+    LIKE CONCAT('%',searchName,'%')
+    AND city LIKE CONCAT('%',citySearch,'%') 
+    AND country LIKE CONCAT('%',countrySearch,'%')  
+    LIMIT showLimit;
+END $$
+ 
+DELIMITER ;
