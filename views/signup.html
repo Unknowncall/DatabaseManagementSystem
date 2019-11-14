@@ -1,0 +1,52 @@
+<div style="padding-top: 10px;">
+<div class="container">
+    <h1 style="text-align:center; text-decoration:underline; padding-bottom:5px;">Sign Up</h1>
+    <form class="needs-validation" novalidate action="index.php?mode=newuser" method="post">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">First name</label>
+                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" name="fname" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom02">Last name</label>
+                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" name="lname" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom05">Email</label>
+                <div class="input-group">
+                    <input type="email" class="form-control" id="validationCustomUsername" placeholder="Email" name="email" aria-describedby="inputGroupPrepend" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-5 mb-3">
+                <label for="validationCustom03">Username</label>
+                <input type="text" class="form-control" id="validationCustom03" placeholder="Username" name="username" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationCustom04">Password</label>
+                <input type="password" class="form-control" id="validationCustom04" placeholder="Password" name="pass" required>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit">Create Account</button>
+        <button class="btn btn-secondary" type="reset">Clear</button>
+    </form>
+</div>
+</div>
+<script type="text/javascript">
+(function() {
+    'use strict';
+    window.addEventListener('load', function(){
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form){
+            form.addEventListener('submit', function(event){
+                if(form.checkValidity() === false){
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>

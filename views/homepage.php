@@ -30,7 +30,7 @@
 
 
 			echo "<table>";
-			echo "<tr><td><a href='index.php?viewer=airport&name={$name}'/>{$modifiedname},<td><td><a href='index.php?viewer=airport&name={$name}'/>{$city}</td>";
+			echo "<tr><td><a href='index.php?viewer=airport&name={$name}'/>{$modifiedname}, {$city}</a></td>";
 			echo "</tr>";
 			echo "</table>";
 			

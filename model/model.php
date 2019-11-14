@@ -23,9 +23,7 @@
     }
 
     function checkValidUser($db){
-        // validate user
         $sql = "select email, first_name, last_name from `users` where username = :username and password = :password";
-        // define values for parameters
         $values = array(':username'=>$_POST['username'], ':password'=>md5($_POST['password']));
         $result = getOneRecord($sql, $db, $values);
         

@@ -355,7 +355,7 @@ if ($viewer == '' && $review == '') {
                 $data = checkValidUser($db);
                 
                 if (isset($data) && isset($data['email'])) {
-                    $_SESSION['user']  = $data['last_name'] . ', ' . $data['first_name'];
+                    $_SESSION['user']  = $data['first_name']. ' ' .$data['last_name'];
                     $_SESSION['email'] = $data['email'];
 ?>
                <script type="text/javascript">
@@ -390,10 +390,7 @@ if ($viewer == '' && $review == '') {
                 </script>
                 <?php
             break;
-        
-        case 'profilepage':
-            
-            break;
+    
         case 'routesearch':
             include('views/routesearch.php');
             break;
@@ -442,6 +439,47 @@ if ($viewer == '' && $review == '') {
                 include('views/rtsearch.php');
                 break;
             }
+            
+        case 'signup':
+            include("views/signup.html");
+            break;
+        
+        case 'profilepage':
+            
+            break;
+            
+        case 'newuser':
+            $username = $password = $email = $fname = $lname = '';
+            if(isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname'])){
+                $username = $_POST['username'];
+                $password = $_POST['pass'];
+                $email = $_POST['email'];
+                $fname = $_POST['fname'];
+                $lname = $_POST['lname'];
+            }
+            
+            $sql = 'INSERT INTO `users` (username, password, email, first_name, last_name) VALUES (:username, :pass, :email, :first, :last)';
+            $parameters = array(':username' => $username, ':pass' => md5($password), ':email' => $email, ':first' => $fname, ':last' => $lname);
+            
+            $statement = $db->prepare($sql);
+            $statement->execute($parameters);
+            
+            $sql2 = "select email, first_name, last_name from `users` where username = :username and password = :pass";
+            $parameters2 = array(':username' => $username, ':pass' => md5($password));
+            $data = getOneRecord($sql2, $db, $parameters2);
+            
+            if (isset($data) && isset($data['email'])) {
+                $_SESSION['user']  = $data['first_name']. ' ' .$data['last_name'];
+                $_SESSION['email'] = $data['email'];
+            ?>
+               <script type="text/javascript">
+                    window.location.href = 'index.php?mode=profilepage';
+                </script>
+            <?php
+            }
+            
+            break;
+            
         default:
             include("views/homepage.php");
             break;

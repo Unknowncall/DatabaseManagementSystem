@@ -75,7 +75,7 @@
                         <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password">
                         <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
                     </form>
-                    <form>
+                    <form action="index.php?mode=signup" method="post">
                         <div style="padding-left: 3px;">
                             <button class="btn btn-secondary" type="submit">Sign Up</button>
                         </div>
