@@ -357,6 +357,7 @@ if ($viewer == '' && $review == '') {
                 if (isset($data) && isset($data['email'])) {
                     $_SESSION['user']  = $data['first_name']. ' ' .$data['last_name'];
                     $_SESSION['email'] = $data['email'];
+                    $_SESSION['username'] = $_POST['username'];
 ?>
                <script type="text/javascript">
                     window.location.href = 'index.php?mode=profilepage';
@@ -445,7 +446,10 @@ if ($viewer == '' && $review == '') {
             break;
         
         case 'profilepage':
+            $sql = 'SELECT * FROM `users` WHERE email = :email';
+            $dataList = getOneRecord($sql, $db, array(':email' => $_SESSION['email']));
             
+            include("views/profile.php");
             break;
             
         case 'newuser':
@@ -479,7 +483,37 @@ if ($viewer == '' && $review == '') {
             }
             
             break;
+        case 'updatedinfo':
+            $username = $fname = $lname = '';
+            if(isset($_POST['username']) && isset($_POST['fname']) && isset($_POST['lname'])){
+                $username = $_POST['username'];
+                $fname = $_POST['fname'];
+                $lname = $_POST['lname'];
+            }
             
+            if($username == '' || $fname == '' || $lname == ''){
+                echo '<div class="container" style="margin-top:25px;"><div class="alert alert-danger" role="alert">
+                      <h4 class="alert-heading">Error</h4>
+                      <p>One or more fields were left empty.</p>
+                      <hr>
+                      <p class="mb-0">Please <strong><a href="index.php?mode=profilepage">go back</a></strong>.</p>
+                    </div></div>';
+            }else{
+                $sql = "UPDATE `users` SET username = :user, first_name = :fname, last_name = :lname WHERE email = :email";
+                $parameters = array(':user' => $username, ':fname' => $fname, ':lname' => $lname, ':email' => $_SESSION['email']);
+                
+                $statement = $db->prepare($sql);
+                $statement->execute($parameters);
+                
+                echo '<div class="container" style="margin-top:25px;"><div class="alert alert-success" role="alert">
+                      <h4 class="alert-heading">Success</h4>
+                      <p>Your profile has been successfully updated.</p>
+                      <hr>
+                      <p class="mb-0">Please <strong><a href="index.php">click here</a></strong> if you would like to return to the Home page.</p>
+                    </div></div>';
+            }
+                
+            break;
         default:
             include("views/homepage.php");
             break;
