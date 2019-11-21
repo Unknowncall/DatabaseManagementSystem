@@ -50,10 +50,21 @@
 							$totalRoutes = $j;
 						}
 						for ($i = 1; $i <= 10; $i++) {
-							$routeSelection = rand(0, $totalRoutes);
-							$randomRoute = "SELECT DISTINCT airline.name AS airline_name, airport1.name AS source_airport, airport2.name AS destination_airport FROM airlines airline, airports airport1, airports airport2, routes r WHERE r.id = 5714 AND r.source_airport_id = airport1.airport_id AND r.destination_airport_id = airport2.airport_id AND r.airline_id = airline.id;";
-							$data = getOneRecord($randomRoute, $db, null);
-							echo "<tr><td> {$i}: {$data['airline_name']}: {$data['source_airport']} -> {$data['destination_airport']}</td></tr>";
+
+								$routeSelection = rand(0, $totalRoutes);
+								$randomRoute = "SELECT airline.name AS airline_name, airport1.name AS source_airport, airport2.name AS destination_airport FROM airports airport1, airports airport2, airlines airline WHERE airport1.airport_id = (SELECT source_airport_id FROM routes WHERE id = {$routeSelection}) AND airport2.airport_id = (SELECT destination_airport_id FROM routes WHERE id = {$routeSelection}) AND airline.id = (SELECT airline_id FROM routes WHERE id = {$routeSelection});";
+
+								$airlineName = $data['airline_name'];
+								$sourceAirport = $data['source_airport'];
+								$destinationAirport = $data['destination_airport'];
+
+								if (!($airlineName == '' || $sourceAirport == '' || $destinationAirport = '')) { 
+									$data = getOneRecord($randomRoute, $db, null);
+									echo "<tr><td> {$i}: {$airlineName}: {$sourceAirport} -> {$destinationAirport} </td></tr>"; 
+								}
+
+							
+
 						}	
 					?>
 				</table>
