@@ -7,35 +7,38 @@
 		<div class="column random_airport">
 			<center>
 			<h3>Want to learn about a random airport?</h3>
-				<?php
-					$sql = "SELECT COUNT(*) FROM `airports`";
-					$data = getOneRecord($sql, $db, null);
-					foreach ($data as $x){
-						$airportSelection = rand(0, $x);
-						$sql2 = "SELECT name, city, country FROM `airports` WHERE airport_id = {$airportSelection}";
-						
-						$data2 = getOneRecord($sql2, $db, null);
-						$name = $data2['name'];
-						$modifiedname = str_replace("_", '\'', $data2['name']);
-						$city = $data2['city'];
-						$country = $data2['country'];
-						while ($name == "") {
-							$airportSelection = rand(0, $x);
-							$sql2 = "SELECT name, city FROM `airports` WHERE airport_id = {$airportSelection}";
+				<table>
+					<?php
+						$totalAirports = 0;
+						foreach (getOneRecord("SELECT COUNT(*) FROM airports;",$db,null) as $j) {
+							$totalAirports = $j;
+						}
+
+						for ($i = 0; $i < 4; $i++) {
+
+							$airportSelection = rand(0, $totalAirports);
+							$sql2 = "SELECT name, city, country FROM `airports` WHERE airport_id = {$airportSelection}";
+								
 							$data2 = getOneRecord($sql2, $db, null);
 							$name = $data2['name'];
 							$modifiedname = str_replace("_", '\'', $data2['name']);
 							$city = $data2['city'];
+							$country = $data2['country'];
+
+							while ($name == "") {
+								$airportSelection = rand(0, $totalAirports);
+								$sql2 = "SELECT name, city FROM `airports` WHERE airport_id = {$airportSelection}";
+								$data2 = getOneRecord($sql2, $db, null);
+								$name = $data2['name'];
+								$modifiedname = str_replace("_", '\'', $data2['name']);
+								$city = $data2['city'];
+							}
+
+							echo "<tr><td><a href='index.php?viewer=airport&name={$name}'/>{$modifiedname}, {$city}</a></td></tr>";
 						}
-
-
-				echo "<table>";
-				echo "<tr><td><a href='index.php?viewer=airport&name={$name}'/>{$modifiedname}, {$city}</a></td>";
-				echo "</tr>";
-				echo "</table>";
-				
-				}
-				?>
+						
+					?>
+				</table>
 			</center>
 		</div>
 	</div>
@@ -59,16 +62,15 @@
 
 								$randomRoute = "SELECT airline.name AS airline_name, airport1.name AS source_airport, airport2.name AS destination_airport FROM airports airport1, airports airport2, airlines airline WHERE airport1.airport_id = (SELECT source_airport_id FROM routes WHERE id = {$routeSelection}) AND airport2.airport_id = (SELECT destination_airport_id FROM routes WHERE id = {$routeSelection}) AND airline.id = (SELECT airline_id FROM routes WHERE id = {$routeSelection})";
 
-
 								$data = getOneRecord($randomRoute, $db, null);
 
 								$airlineName = $data['airline_name'];
-								$sourceAirport = $data['source_airport'];
-								$destinationAirport = $data['destination_airport'];
+								$sourceAirport = str_replace("_", "'", $data['source_airport']);
+								$destinationAirport = str_replace("_", "'", $data['destination_airport']);
 
 								if (!($airlineName == '' || $sourceAirport == '' || $destinationAirport == '')) {
 									$foundGoodRoute = true;
-									echo "<tr><td> <a href='index.php?viewer=route&id={$routeSelection}'>{$i}: {$airlineName}: {$sourceAirport} -> {$destinationAirport} </a></td></tr>";
+									echo "<tr><td> <a href='index.php?viewer=route&id={$routeSelection}'>{$airlineName}: {$sourceAirport} -> {$destinationAirport} </a></td></tr>";
 								}
 							} 
 						}	
