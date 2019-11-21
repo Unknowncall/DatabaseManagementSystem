@@ -51,20 +51,26 @@
 						}
 						for ($i = 1; $i <= 10; $i++) {
 
+							$foundGoodRoute = false;
+
+							while ($foundGoodRoute == false) {
+
 								$routeSelection = rand(0, $totalRoutes);
-								$randomRoute = "SELECT airline.name AS airline_name, airport1.name AS source_airport, airport2.name AS destination_airport FROM airports airport1, airports airport2, airlines airline WHERE airport1.airport_id = (SELECT source_airport_id FROM routes WHERE id = {$routeSelection}) AND airport2.airport_id = (SELECT destination_airport_id FROM routes WHERE id = {$routeSelection}) AND airline.id = (SELECT airline_id FROM routes WHERE id = {$routeSelection});";
+
+								$randomRoute = "SELECT airline.name AS airline_name, airport1.name AS source_airport, airport2.name AS destination_airport FROM airports airport1, airports airport2, airlines airline WHERE airport1.airport_id = (SELECT source_airport_id FROM routes WHERE id = {$routeSelection}) AND airport2.airport_id = (SELECT destination_airport_id FROM routes WHERE id = {$routeSelection}) AND airline.id = (SELECT airline_id FROM routes WHERE id = {$routeSelection})";
+
+
+								$data = getOneRecord($randomRoute, $db, null);
 
 								$airlineName = $data['airline_name'];
 								$sourceAirport = $data['source_airport'];
 								$destinationAirport = $data['destination_airport'];
 
-								if (!($airlineName == '' || $sourceAirport == '' || $destinationAirport = '')) { 
-									$data = getOneRecord($randomRoute, $db, null);
-									echo "<tr><td> {$i}: {$airlineName}: {$sourceAirport} -> {$destinationAirport} </td></tr>"; 
+								if (!($airlineName == '' || $sourceAirport == '' || $destinationAirport == '')) {
+									$foundGoodRoute = true;
+									echo "<tr><td> <a href='index.php?viewer=route&id={$routeSelection}'>{$i}: {$airlineName}: {$sourceAirport} -> {$destinationAirport} </a></td></tr>";
 								}
-
-							
-
+							} 
 						}	
 					?>
 				</table>
