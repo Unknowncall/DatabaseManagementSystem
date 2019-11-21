@@ -68,7 +68,7 @@
                             <a class="nav-link" href="index.php?mode=logout">Log Out</a>
                         </li>
                     </ul>
-                    <h4>You are signed in as: <i><?php echo $_SESSION['username']; ?></i></h4>
+                    <h4>You are signed in as: <i><?php echo $_SESSION['user']; ?></i></h4>
                     <?php }else{ ?>
                     </ul>       
                     <form class="form-inline my-2 my-lg-0" action="index.php?mode=login" method="post">

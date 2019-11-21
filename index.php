@@ -383,7 +383,7 @@ if ($viewer == '' && $review == '') {
         
         case 'logout':
             session_destroy();
-            setcookie(session_name(), '', time() - 1000, '/');
+            //setcookie(session_name(), '', time() - 1000, '/');
             $_SESSION = array();
 ?>
                <script type="text/javascript">
@@ -476,6 +476,7 @@ if ($viewer == '' && $review == '') {
                 $_SESSION['user']  = $data['first_name']. ' ' .$data['last_name'];
                 $_SESSION['email'] = $data['email'];
             ?>
+
                <script type="text/javascript">
                     window.location.href = 'index.php?mode=profilepage';
                 </script>
