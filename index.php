@@ -475,6 +475,7 @@ if ($viewer == '' && $review == '') {
             if (isset($data) && isset($data['email'])) {
                 $_SESSION['user']  = $data['first_name']. ' ' .$data['last_name'];
                 $_SESSION['email'] = $data['email'];
+                $_SESSION['username'] = $_POST['username'];
             ?>
 
                <script type="text/javascript">
@@ -506,6 +507,13 @@ if ($viewer == '' && $review == '') {
                 $statement = $db->prepare($sql);
                 $statement->execute($parameters);
                 
+                $data = getOneRecord('SELECT email, username, first_name, last_name FROM `users` WHERE email = :email', $db, array(':email' => $_SESSION['email']));
+            
+                if (isset($data) && isset($data['email'])) {
+                    $_SESSION['user']  = $data['first_name']. ' ' .$data['last_name'];
+                    $_SESSION['username'] = $data['username'];
+                }
+                
                 echo '<div class="container" style="margin-top:25px;"><div class="alert alert-success" role="alert">
                       <h4 class="alert-heading">Success</h4>
                       <p>Your profile has been successfully updated.</p>
@@ -515,6 +523,19 @@ if ($viewer == '' && $review == '') {
             }
                 
             break;
+            
+        case 'airportmodify':
+            include('views/apmodify.html');
+            break;
+            
+        case 'airlinemodify':
+            include('views/airlinemodify.html');
+            break;
+            
+        case 'planemodify':
+            include('views/planemodify.html');
+            break;
+            
         default:
             include("views/homepage.php");
             break;

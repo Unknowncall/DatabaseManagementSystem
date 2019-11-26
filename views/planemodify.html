@@ -1,0 +1,41 @@
+<div style="padding-top: 10px;">
+<div class="container">
+    <h1 style="text-align:center; text-decoration:underline; padding-bottom:5px;">Add New Airplane</h1>
+    <form class="needs-validation" novalidate action="index.php?mode=addplane" method="post">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label>Plane Name<sup>*</sup></label>
+                <input type="text" class="form-control" placeholder="Name" name="plane" required>
+            </div>
+            <div class="col-md-1 mb-3">
+                <label>IATA</label>
+                <input type="text" class="form-control" placeholder="IATA" name="iata">
+            </div>
+            <div class="col-md-1 mb-3">
+                <label>ICAO</label>
+                <input type="text" class="form-control" placeholder="ICAO" name="icao">
+            </div>
+        </div>
+        <p>* means a required field</p>
+        <button class="btn btn-success" type="submit">Submit</button>
+        <button class="btn btn-secondary" type="reset">Clear</button>
+    </form>
+</div>
+</div>
+<script type="text/javascript">
+(function() {
+    'use strict';
+    window.addEventListener('load', function(){
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form){
+            form.addEventListener('submit', function(event){
+                if(form.checkValidity() === false){
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>
