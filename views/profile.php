@@ -3,7 +3,7 @@
     <h1 style="text-align:center; text-decoration:underline; padding-bottom:5px;">Profile</h1>
     <h4 class="border-bottom">Welcome<?php echo ' '.$_SESSION['user']; ?></h4>
     <div class="col-md-1 offset-md-11"><button id="edit" class="btn btn-primary" onclick="edit()">Edit</button></div>
-    <form class="border-bottom" action="index.php?mode=updatedinfo" method="post">
+    <form action="index.php?mode=updatedinfo" method="post">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>First name</label>

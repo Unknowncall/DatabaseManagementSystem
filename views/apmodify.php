@@ -14,7 +14,7 @@
             <div class="col-md-4 mb-3">
                 <label>Country<sup>*</sup></label>
                 <select class="custom-select" name="country" required>
-                    <option selected disabled>Select One</option>
+                    <option selected disabled value="">Select One</option>
                     <?php
                         if(isset($dataList)){
                             foreach($dataList as $country){
@@ -28,11 +28,11 @@
         <div class="form-row">
             <div class="col-md-1 mb-3">
                 <label>IATA</label>
-                <input type="text" class="form-control" placeholder="IATA" name="iata">
+                <input type="text" class="form-control" placeholder="IATA" name="iata" maxlength="4">
             </div>
             <div class="col-md-1 mb-3">
                 <label>ICAO</label>
-                <input type="text" class="form-control" placeholder="ICAO" name="icao">
+                <input type="text" class="form-control" placeholder="ICAO" name="icao" maxlength="4">
             </div>
             <div class="col-md-3 mb-3">
                 <label>Latitude<sup>*</sup></label>

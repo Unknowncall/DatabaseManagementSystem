@@ -514,6 +514,11 @@ if ($viewer == '' && $review == '') {
                     $_SESSION['username'] = $data['username'];
                 }
                 
+                ?>
+                <script type="text/javascript">
+                    document.getElementById('signedin').innerHTML = "You are signed in as: <i><?php echo $_SESSION['user']; ?></i>";
+                </script>
+                <?php
                 echo '<div class="container" style="margin-top:25px;"><div class="alert alert-success" role="alert">
                       <h4 class="alert-heading">Success</h4>
                       <p>Your profile has been successfully updated.</p>
@@ -525,11 +530,15 @@ if ($viewer == '' && $review == '') {
             break;
             
         case 'airportmodify':
-            include('views/apmodify.html');
+            $sql = 'SELECT DISTINCT country FROM `airports` ORDER BY country';
+            $dataList = getAllRecords($sql, $db, null);
+            include('views/apmodify.php');
             break;
             
         case 'airlinemodify':
-            include('views/airlinemodify.html');
+            $sql = 'SELECT DISTINCT country FROM `airports` ORDER BY country';
+            $dataList = getAllRecords($sql, $db, null);
+            include('views/airlinemodify.php');
             break;
             
         case 'planemodify':

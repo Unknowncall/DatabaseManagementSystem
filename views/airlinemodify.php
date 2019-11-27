@@ -14,7 +14,7 @@
             <div class="col-md-4 mb-3">
                 <label>Country<sup>*</sup></label>
                 <select class="custom-select" name="country" required>
-                        <option selected value="">All</option>
+                        <option selected disabled value="">Select One</option>
                         <?php
                             if(isset($dataList)){
                                 foreach($dataList as $country){
@@ -41,7 +41,7 @@
             <div class="col-md-2 mb-3">
                 <label>Active</label>
                 <select class="custom-select" name="active">
-                    <option value="N" selected disabled>Select</option>
+                    <option value="N" selected>Unknown</option>
                     <option value="1">Active</option>
                     <option value="0">Inactive</option>
                 </select>
