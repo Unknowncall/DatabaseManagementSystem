@@ -1,5 +1,6 @@
 <div class="container">
     <table class="table table-striped">
+        <caption>Information on Route</caption>
         <tr>
             <th>Source Airport</th>
             <th>Destination Airport</th>

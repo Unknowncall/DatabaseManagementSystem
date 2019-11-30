@@ -42,9 +42,8 @@
 
                     $ratingSQL = "SELECT AVG(rating) FROM `airport_reviews` WHERE airport_id = {$id}";
                     $avg = getOneRecord($ratingSQL, $db, null);
-
-                    foreach($avg as $rating) {echo "<td colspan='4'> {$rating} ⭐</td>";}
-
+        
+                    foreach($avg as $rating) {echo "<td> {$rating} ⭐</td>";}
 
             echo "</tr>";
 
@@ -71,9 +70,9 @@
 </div>
 <script type="text/javascript">
     function loadMap() {
-        var latt = <?php echo $lattitude ?>;
-        var long = <?php echo $longitude ?>;
-        var name = "<?php echo $name ?>";
+        var latt = <?php echo $lattitude; ?>;
+        var long = <?php echo $longitude; ?>;
+        var name = "<?php echo $name; ?>";
     
         var map = new Microsoft.Maps.Map(document.getElementById('map'), { center: new Microsoft.Maps.Location(latt, long), zoom: 12 });
     

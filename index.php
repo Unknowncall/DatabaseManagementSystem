@@ -264,6 +264,8 @@ if ($viewer == '' && $review == '') {
             
             break;
         case 'airlinesearch': # Show the search function for airlines.
+            $sql = 'SELECT DISTINCT country FROM `airports` ORDER BY country';
+            $dataList = getAllRecords($sql, $db, null);
             include('views/airlinesearch.php');
             break;
         case 'airsearch': # Execute the search function for airlines.

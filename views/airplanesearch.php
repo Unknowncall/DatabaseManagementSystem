@@ -1,12 +1,12 @@
 <div class="container">
     <h1 style="padding:15px; text-decoration:underline; text-align:center;">Plane Search</h1>
     <form action="index.php?mode=planeresults" method="post">
-        <table class="table table-borderless table-hover">
-            <tr scope="row">
-                <td style="float:right;">Name:</td>
-                <td><input class="form-control" type="text" name="planename" placeholder="Ex. Boeing"></td>
-            </tr>
-            <tr><td colspan="2"><button class="btn btn-success" style="float:right;" type="submit">Search</button></td></tr>
-        </table>
+        <div class="form-row">
+            <div class= "col-md-6 offset-md-3 mb-3">
+                <label>Airplane Name</label>
+                <input class="form-control" type="text" name="planename" placeholder="Ex. Boeing">
+            </div>
+        </div>
+        <button class="btn btn-success offset-md-3" type="submit">Search</button>
     </form>
 </div>

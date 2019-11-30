@@ -1,5 +1,6 @@
 <div class="container">
     <table class="table table-striped">
+        <caption>Information on Airline</caption>
         <tr>
             <th>Name</th>
             <th>Alias</th>

@@ -1,5 +1,6 @@
 <div class="container">
     <table class="table table-striped">
+        <caption>Information on Airplane</caption>
         <tr>
             <th>Name</th>
             <th>IATA</th>
