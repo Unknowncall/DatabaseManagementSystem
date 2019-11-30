@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 style="padding:15px; text-decoration:underline; text-align:center;">Route Search</h2>
+    <h1 style="padding:15px; text-decoration:underline; text-align:center;">Route Search</h1>
     <form action="index.php?mode=rtsearch" method="post">
         <table class="table table-borderless table-hover">
             <tr scope="row">

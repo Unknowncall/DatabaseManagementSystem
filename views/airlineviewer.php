@@ -7,11 +7,14 @@
             <th>ICAO</th>
         </tr>
         <?php
-            $stringAlias = ($alias = 'N' ? 'N/A' : $alias);
-
+            if($alias == 'N'){ $alias = 'N/A'; }
+            if($iata == 'N'){ $iata = 'N/A'; }
+            if($icao == 'N'){ $icao = 'N/A'; }
+            if($callsign == 'N'){ $callsign = 'N/A'; }
+        
             echo "<tr>";
                     echo "<td> {$name} </td>";
-                    echo "<td> {$stringAlias} </td>";
+                    echo "<td> {$alias} </td>";
                     echo "<td> {$iata} </td>";
                     echo "<td> {$icao} </td>";
             echo "</tr>";
@@ -23,7 +26,11 @@
             <th>Average Rating</th>
         </tr>
         <?php
-            $stringActive = ($active = 1 ? 'True' : 'False');
+            if($active == 1){
+                $stringActive = 'True';
+            }else{
+                $stringActive = 'False';
+            }
 
             echo "<tr>";
                     echo "<td> {$callsign} </td>";

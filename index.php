@@ -535,14 +535,68 @@ if ($viewer == '' && $review == '') {
             include('views/apmodify.php');
             break;
             
+        case 'addap':
+            
+            break;
+            
         case 'airlinemodify':
             $sql = 'SELECT DISTINCT country FROM `airports` ORDER BY country';
             $dataList = getAllRecords($sql, $db, null);
             include('views/airlinemodify.php');
             break;
             
+        case 'addal':
+            $airline = $country = '';
+            $alias = $iata = $icao = $callsign = 'N';
+            $active = 0;
+            
+            if(isset($_POST['al']) && isset($_POST['country'])){ $airline = $_POST['al']; $country = $_POST['country']; }
+            if(isset($_POST['alias']) && $_POST['alias'] != ''){ $alias = $_POST['alias']; }
+            if(isset($_POST['iata']) && $_POST['iata'] != ''){ $iata = $_POST['iata']; }
+            if(isset($_POST['icao']) && $_POST['icao'] != ''){ $icao = $_POST['icao']; }
+            if(isset($_POST['cs']) && $_POST['cs'] != ''){ $callsign = $_POST['cs']; }
+            if(isset($_POST['active'])){ $active = $_POST['active']; }
+            
+            $sql = 'INSERT INTO `airlines` (name, alias, iata, icao, callsign, country, active) VALUES (:name, :alias, :iata, :icao, :callsign, :country, :active)';
+            $parameters = array(':name' => $airline, ':alias' => $alias, ':iata' => $iata, ':icao' => $icao, ':callsign' => $callsign, ':country' => $country, ':active' => $active);
+            
+            $statement = $db->prepare($sql);
+            $statement->execute($parameters);
+            
+            echo '<div class="container" style="margin-top:25px;"><div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Success</h4>
+                    <p>You have successfully added <i>'.$airline.'</i> to the database.</p>
+                    <hr>
+                    <p class="mb-0"><strong><a href="index.php?viewer=airline&name='.$airline.'">Click here</a></strong> to see the search result of your Airline.</p>
+                </div></div>';
+            
+            break;
+            
         case 'planemodify':
             include('views/planemodify.html');
+            break;
+        
+        case 'addplane':
+            $plane = '';
+            $iata = $icao = 'N';
+            
+            if(isset($_POST['plane'])){ $plane = $_POST['plane']; }
+            if(isset($_POST['iata']) && $_POST['iata'] != ''){ $iata = $_POST['iata']; }
+            if(isset($_POST['icao']) && $_POST['iata'] != ''){ $icao = $_POST['icao']; }
+            
+            $sql = 'INSERT INTO `planes` (name, iata, icao) VALUES (:plane, :iata, :icao)';
+            $parameters = array(':plane' => $plane, ':iata' => $iata, ':icao' => $icao);
+            
+            $statement = $db->prepare($sql);
+            $statement->execute($parameters);
+            
+            echo '<div class="container" style="margin-top:25px;"><div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Success</h4>
+                    <p>You have successfully added <i>'.$plane.'</i> to the database.</p>
+                    <hr>
+                    <p class="mb-0"><strong><a href="index.php?viewer=airplane&name='.$plane.'">Click here</a></strong> to see the search result of your Airplane.</p>
+                </div></div>';
+            
             break;
             
         default:

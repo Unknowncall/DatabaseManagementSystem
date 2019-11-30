@@ -28,11 +28,11 @@
         <div class="form-row">
             <div class="col-md-1 mb-3">
                 <label>IATA</label>
-                <input type="text" class="form-control" placeholder="IATA" name="iata" maxlength="4">
+                <input type="text" class="form-control" placeholder="IATA" name="iata" maxlength="2">
             </div>
             <div class="col-md-1 mb-3">
                 <label>ICAO</label>
-                <input type="text" class="form-control" placeholder="ICAO" name="icao" maxlength="4">
+                <input type="text" class="form-control" placeholder="ICAO" name="icao" maxlength="3">
             </div>
             <div class="col-md-3 mb-3">
                 <label>Callsign</label>
@@ -41,7 +41,7 @@
             <div class="col-md-2 mb-3">
                 <label>Active</label>
                 <select class="custom-select" name="active">
-                    <option value="N" selected>Unknown</option>
+                    <option value="0" selected>Unknown</option>
                     <option value="1">Active</option>
                     <option value="0">Inactive</option>
                 </select>
