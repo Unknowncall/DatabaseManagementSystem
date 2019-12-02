@@ -3,9 +3,9 @@
       <h2>You are about to leave a review about the airplane:</h2>
       <?php
 
-            $id = '';
-            if(isset($_GET['id'])){$id = $_GET["id"];}
-            $sql = "SELECT name FROM `airlines` WHERE `name` = {$id}";
+            $n = '';
+            if(isset($_GET['name'])){$n = $_GET['name'];}
+            $sql = "SELECT name FROM `planes` WHERE name = {$n}";
 
             $data = getOneRecord($sql, $db, null);
             $name = $data['name'];
@@ -73,7 +73,7 @@
    </style>
    <center>
    <?php
-      echo "<form action='index.php?review=insert_airplane&id={$id}' method='post'>";
+      echo "<form action='index.php?review=insert_airplane&name={$n}' method='post'>";
    ?>
     
          <label>

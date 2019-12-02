@@ -14,7 +14,7 @@
             echo "</tr>";
 
             echo "<tr>";
-            echo "<form action='index.php?review=airplane' method='post'>";
+            echo "<form action='index.php?review=airplane&name={$name}' method='post'>";
             echo "<td colspan='1'><button class='btn btn-success' style='float:left' type='submit'>Leave Review</button></form>";
 
             echo "<form action='index.php?mode=airplanesearch' method='post'>";

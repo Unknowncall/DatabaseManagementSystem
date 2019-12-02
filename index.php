@@ -71,17 +71,21 @@ switch ($review) {
     case 'insert_airplane':
 
         $rating = $_POST["rating"];
-        $id = '';
-        if (isset($_GET['id'])) {$id = $_GET['id'];}
-        $sql = "INSERT INTO `plane_reviews` (`name`, `rating`, `review_id`) VALUES ('{$id}', '{$rating}', NULL)";
+        $name = '';
+        if (isset($_GET['name'])) {$name = $_GET['name'];}
+        
+        $sql = "INSERT INTO `plane_reviews` (`name`, `rating`, `review_id`) VALUES ('{$name}', '{$rating}', NULL)";
         executeSQL($sql, $db, null);
 
-            $sql        = "SELECT * FROM `planes` WHERE name = {$id}";
-            $dataList   = getOneRecord($sql, $db, null);
-            
+            $sql        = "SELECT * FROM `planes` WHERE name = :name";
+            $parameters = array(':name' => $name);
+            $dataList   = getOneRecord($sql, $db, $parameters);
+    
             $name = $dataList['name'];
             $iata = $dataList['iata'];
             $icao = $dataList['icao'];
+        
+            
             
             include("views/planeviewer.php");
             
@@ -598,6 +602,65 @@ if ($viewer == '' && $review == '') {
                     <hr>
                     <p class="mb-0"><strong><a href="index.php?viewer=airplane&name='.$plane.'">Click here</a></strong> to see the search result of your Airplane.</p>
                 </div></div>';
+            
+            break;
+        case 'apratesearch':
+            $rating = 0;
+            $show = 10;
+            if(isset($_POST['rating'])){ $rating = $_POST['rating']; }
+            
+            if (isset($_GET['show'])) { $show = $_GET['show']; }
+            
+            $sql = 'SELECT a.name, AVG(r.rating) FROM `airports` a, `airport_reviews` r INNER JOIN `airport_reviews` r2 WHERE r.airport_id = r2.airport_id AND r2.airport_id = a.airport_id GROUP BY a.name HAVING AVG(r.rating) >= :rating and AVG(r.rating) < :rating + 1 ORDER BY a.name';
+            $parameters = array(':rating' => $rating);
+            $dataList = getAllRecords($sql, $db, $parameters);
+            
+            $result = $db->prepare($sql);
+            $result->execute($parameters);
+            $num_of_rows = $result->rowCount();
+            $count = $num_of_rows;
+            
+            include('views/apresults.php');
+            
+            break;
+            
+        case 'alratesearch':
+            $rating = 0;
+            $show = 10;
+            if(isset($_POST['rating'])){ $rating = $_POST['rating']; }
+            
+            if (isset($_GET['show'])) { $show = $_GET['show']; }
+            
+            $sql = 'SELECT a.name, AVG(r.rating) FROM `airlines` a, `airline_reviews` r INNER JOIN `airline_reviews` r2 WHERE r.airline_id = r2.airline_id AND r2.airline_id = a.id GROUP BY a.name HAVING AVG(r.rating) >= :rating and AVG(r.rating) < :rating + 1 ORDER BY a.name';
+            $parameters = array(':rating' => $rating);
+            $dataList = getAllRecords($sql, $db, $parameters);
+            
+            $result = $db->prepare($sql);
+            $result->execute($parameters);
+            $num_of_rows = $result->rowCount();
+            $count = $num_of_rows;
+            
+            include('views/airsearch.php');
+            
+            break;
+        
+        case 'planeratesearch':
+            $rating = 0;
+            $show = 10;
+            if(isset($_POST['rating'])){ $rating = $_POST['rating']; }
+            
+            if (isset($_GET['show'])) { $show = $_GET['show']; }
+            
+            $sql = 'SELECT p.name, AVG(r.rating) FROM `planes` p, `plane_reviews` r INNER JOIN `plane_reviews` r2 WHERE r.name = r2.name AND r2.name = p.name GROUP BY p.name HAVING AVG(r.rating) >= :rating and AVG(r.rating) < :rating + 1 ORDER BY p.name';
+            $parameters = array(':rating' => $rating);
+            $dataList = getAllRecords($sql, $db, $parameters);
+            
+            $result = $db->prepare($sql);
+            $result->execute($parameters);
+            $num_of_rows = $result->rowCount();
+            $count = $num_of_rows;
+            
+            include('views/planeresults.php');
             
             break;
             
