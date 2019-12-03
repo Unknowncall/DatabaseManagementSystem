@@ -1,4 +1,5 @@
 <div class="container">
+
     <table class="table table-hover table-striped">
         <tr>
             <th style="text-decoration:underline;">Routes Name</th>
@@ -35,5 +36,4 @@
             }
         ?>
     </table>
-
 </div>

@@ -42,5 +42,4 @@
         </form>
 
     </table>
-    </form>
 </div>

@@ -427,8 +427,8 @@ if ($viewer == '' && $review == '') {
                 $show = 10;
             }
             
-            echo "<center>You must specify a departing and arriving airport.</center>";
             if ($depart == "" || $arrive == "") {
+                echo "<center>You must specify a departing and arriving airport.</center>";
                 include('views/routesearch.php');
                 break;
             } else {
