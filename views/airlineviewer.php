@@ -38,10 +38,14 @@
                     echo "<td> {$country} </td>";
                     echo "<td> {$stringActive} </td>";
 
-                   $ratingSQL = "SELECT AVG(rating) FROM `airline_reviews` WHERE airline_id = {$id}";
-                    $avg = getOneRecord($ratingSQL, $db, null);
-
-                    foreach($avg as $rating) {echo "<td> {$rating} ⭐</td>";}
+                   $ratingSQL = "SELECT round(AVG(rating),2) FROM `airline_reviews` WHERE airline_id = :id";
+                   $avg = getOneRecord($ratingSQL, $db, array(':id' => $id));
+        
+                    if($avg['round(AVG(rating),2)'] == null){
+                        echo "<td>No Reviews</td>";
+                    }else{
+                        foreach($avg as $rating) {echo "<td> {$rating} ⭐</td>";}
+                    }
 
             echo "</tr>";
 

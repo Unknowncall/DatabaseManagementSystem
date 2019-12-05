@@ -80,6 +80,7 @@
                                 <a class='dropdown-item' href='index.php?mode=routesearch'>Routes</a>
                            </div>
                         </li>
+                         <?php if(isset($_SESSION['user'])){ ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Add</a>
@@ -87,10 +88,8 @@
                                 <a class='dropdown-item' href='index.php?mode=airportmodify'>Airports</a>
                                 <a class='dropdown-item' href='index.php?mode=airlinemodify'>Airlines</a>
                                 <a class='dropdown-item' href='index.php?mode=planemodify'>Airplanes</a>
-                                <a class='dropdown-item' href='index.php?mode=routemodify'>Routes</a>
                            </div>
                         </li>
-                        <?php if(isset($_SESSION['user'])){ ?>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?mode=profilepage">Profile</a>
                         </li>

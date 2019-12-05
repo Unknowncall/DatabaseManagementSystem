@@ -28,7 +28,7 @@
         <div class="form-row">
             <div class="col-md-1 mb-3">
                 <label>IATA</label>
-                <input type="text" class="form-control" placeholder="IATA" name="iata" maxlength="4">
+                <input type="text" class="form-control" placeholder="IATA" name="iata" maxlength="3">
             </div>
             <div class="col-md-1 mb-3">
                 <label>ICAO</label>
@@ -48,17 +48,35 @@
             </div>
             </div>
         <div class="form-row">
-            <div class="col-md-2 mb-3">
-                <label>Timezone</label>
-                <input type="number" class="form-control" placeholder="Timezone" name="timezone">
-            </div>
             <div class="col-md-1 mb-3">
-                <label>DST</label>
-                <input type="text" class="form-control" placeholder="DST" name="dst">
+                <label>UTC</label>
+                <input type="number" class="form-control" placeholder="UTC" name="utc">
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-2 mb-3">
+                <label>DST</label>
+                <select class="custom-select" name="dst">
+                    <option value="U">Unknown</option>
+                    <option value="E">European</option>
+                    <option value="A">US/Canada</option>
+                    <option value="S">S. America</option>
+                    <option value="O">Australia</option>
+                    <option value="Z">New Zealand</option>
+                    <option value="N">None</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
                 <label>Region</label>
-                <input type="text" class="form-control" placeholder="Region" name="region">
+                <select class="custom-select" name="region">
+                    <option value="N">Unknown</option>
+                    <?php
+                    if(isset($dataList2)){
+                        foreach($dataList2 as $region){
+                            $newregion = str_replace("_", ' ', $region['region']);
+                            echo "<option value='{$region['region']}'>{$newregion}</option>";    
+                        }
+                    }
+                    ?>
+                </select>
             </div>
         </div>
         <p>* means a required field</p>

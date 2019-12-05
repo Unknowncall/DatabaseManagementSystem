@@ -21,17 +21,19 @@
    ?>
     
     <div class="stars">
-        <input id="star-5" type="radio" name="rating" value="5" onchange="this.form.submit();"/>
+        <input id="star-5" type="radio" name="rating" value="5"/>
         <label for="star-5"></label>
-        <input id="star-4" type="radio" name="rating" value="4" onchange="this.form.submit();"/>
+        <input id="star-4" type="radio" name="rating" value="4"/>
         <label for="star-4"></label>
-        <input id="star-3" type="radio" name="rating" value="3" onchange="this.form.submit();"/>
+        <input id="star-3" type="radio" name="rating" value="3"/>
         <label for="star-3"></label>
-        <input id="star-2" type="radio" name="rating" value="2" onchange="this.form.submit();"/>
+        <input id="star-2" type="radio" name="rating" value="2"/>
         <label for="star-2"></label>
-        <input id="star-1" type="radio" name="rating" value="1" onchange="this.form.submit();"/>
+        <input id="star-1" type="radio" name="rating" value="1"/>
         <label for="star-1"></label>
     </div>
+    <br/>
+    <button class="btn btn-success" type="submit">Submit</button>   
     </form>
    </center>
 </div>

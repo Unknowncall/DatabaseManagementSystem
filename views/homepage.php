@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="column paragraph" style="float:left">
 			<center><h1>Airport Database</h1></center>
-			<p>Welcome to our Database Managment Systems project. This was developed by 3 students at Whitewater Wisconsin, Zach Harvey, Ryan Beatty, and Jake Fuller. This project was made strictly for education purposes. Our data was collected from <a href="http://www.openflights.org/" target="_blank">openflights.org</a>.</p>
+			<p>Welcome to our Database Managment Systems project. This was developed by 3 students at Whitewater Wisconsin, Zach Harvey, Ryan Beatty, and Jake Fuller. This project was made strictly for education purposes. Our data was collected from <a href="https://openflights.org/data.html" target="_blank">openflights.org</a>.</p>
 		</div>
 		<div class="column random_airport">
 			<center>

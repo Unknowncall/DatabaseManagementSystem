@@ -5,12 +5,24 @@
             <th>Name</th>
             <th>IATA</th>
             <th>ICAO</th>
+            <th>Average Rating</th>
         </tr>
         <?php
             echo "<tr>";
+                    if($iata == 'N'){ $iata = 'N/A'; }
+                    if($icao == 'N'){ $icao= 'N/A'; }
                     echo "<td> {$name} </td>";
                     echo "<td> {$iata} </td>";
                     echo "<td> {$icao} </td>";
+                    
+                    $ratingSQL = "SELECT round(AVG(rating),2) FROM `plane_reviews` WHERE name = :name";
+                    $avg = getOneRecord($ratingSQL, $db, array(':name' => $name));
+        
+                    if($avg['round(AVG(rating),2)'] == null){
+                        echo "<td>No Reviews</td>";
+                    }else{
+                        foreach($avg as $rating) {echo "<td> {$rating} ⭐</td>";}
+                    }
             echo "</tr>";
 
             echo "<tr>";

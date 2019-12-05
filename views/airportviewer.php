@@ -12,7 +12,11 @@
                     echo "<td> {$name} </td>";
                     echo "<td> {$city} </td>";
                     echo "<td> {$country} </td>";
-                    echo "<td> GMT{$timezone} </td>";
+            if($timezone == 'N'){
+                echo "<td> N/A </td>";
+            }else{
+                echo "<td> GMT{$timezone} </td>";
+            }
             echo "</tr>";
         ?>
         <tr>
@@ -23,6 +27,8 @@
         </tr>
         <?php
             echo "<tr>";
+                    if($iata == 'N'){ $iata = 'N/A'; }
+                    if($icao == 'N'){ $icao = 'N/A'; }
                     echo "<td> {$iata} </td>";
                     echo "<td> {$icao} </td>";
                     echo "<td> {$lattitude} </td>";
@@ -37,13 +43,18 @@
         </tr>
         <?php
             echo "<tr>";
-                    echo "<td> {$altitude} ft. </td>";
-                    echo "<td> {$region} </td>";
-
-                    $ratingSQL = "SELECT AVG(rating) FROM `airport_reviews` WHERE airport_id = {$id}";
-                    $avg = getOneRecord($ratingSQL, $db, null);
+                if($region == 'N'){ $region = 'N/A'; }
+                echo "<td> {$altitude} ft. </td>";
+                echo "<td> {$region} </td>";
+                    
+                $ratingSQL = "SELECT round(AVG(rating),2) FROM `airport_reviews` WHERE airport_id = :id";
+                $avg = getOneRecord($ratingSQL, $db, array(':id' => $id));
         
+                if($avg['round(AVG(rating),2)'] == null){
+                    echo "<td>No Reviews</td>";
+                }else{
                     foreach($avg as $rating) {echo "<td> {$rating} ⭐</td>";}
+                }
 
             echo "</tr>";
 

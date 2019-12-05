@@ -537,11 +537,42 @@ if ($viewer == '' && $review == '') {
         case 'airportmodify':
             $sql = 'SELECT DISTINCT country FROM `airports` ORDER BY country';
             $dataList = getAllRecords($sql, $db, null);
+            $sql = 'SELECT DISTINCT region FROM `airports` WHERE region != "N" ORDER BY region';
+            $dataList2 = getAllRecords($sql, $db, null);
             include('views/apmodify.php');
             break;
             
         case 'addap':
+            $name = $city = $country = '';
+            $lat = $long = $alt = 0;
+            $iata = $icao = $utc = $dst = $region = 'N';
             
+            if(isset($_POST['ap']) && isset($_POST['city']) && isset($_POST['country']) && isset($_POST['lat']) && isset($_POST['long'])){
+                $name = $_POST['ap'];
+                $city = $_POST['city'];
+                $country = $_POST['country'];
+                $lat = $_POST['lat'];
+                $long = $_POST['long'];
+            }
+            if(isset($_POST['iata']) && $_POST['iata'] != ''){ $iata = $_POST['iata']; }
+            if(isset($_POST['icao']) && $_POST['icao'] != ''){ $icao = $_POST['icao']; }
+            if(isset($_POST['alt']) && $_POST['alt'] != ''){ $alt = $_POST['alt']; }
+            if(isset($_POST['utc']) && $_POST['utc'] != ''){ $utc = $_POST['utc']; }
+            if(isset($_POST['dst']) && $_POST['dst'] != ''){ $dst = $_POST['dst']; }
+            if(isset($_POST['region']) && $_POST['region'] != ''){ $region = $_POST['region']; }
+            
+            $sql = 'INSERT INTO `airports` (name, city, country, iata, icao, lattitude, longitude, altitude, timezone, dst, region) VALUES (:name, :city, :country, :iata, :icao, :lattitude, :longitude, :altitude, :timezone, :dst, :region)'; 
+            $parameters = array(':name' => $name, ':city' => $city, ':country' => $country, ':iata' => $iata, ':icao' => $icao, ':lattitude' => $lat, ':longitude' => $long, ':altitude' => $alt, ':timezone' => $utc, ':dst' => $dst, ':region' => $region);
+            
+            $statement = $db->prepare($sql);
+            $statement->execute($parameters);
+            
+            echo '<div class="container" style="margin-top:25px;"><div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Success</h4>
+                    <p>You have successfully added <i>'.$name.'</i> to the database.</p>
+                    <hr>
+                    <p class="mb-0"><strong><a href="index.php?viewer=airport&name='.$name.'">Click here</a></strong> to see the search result of your Airport.</p>
+                </div></div>';
             break;
             
         case 'airlinemodify':
