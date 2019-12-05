@@ -24,10 +24,10 @@
                 </select>
             </div>
         </div>
-        <div style="padding-bottom:15px;"><button class="btn btn-success" type="submit">Search</button></div>
+        <div style="padding-bottom:30px;"><button class="btn btn-success" type="submit">Search</button></div>
     </form>
-    <div style="text-align:center; padding:15px;"><h4>Or</h4></div>
-    <form class="border-top" style="padding-top:15px;" action="index.php?mode=alratesearch" method="post">
+    
+    <form style="padding-top:30px;" action="index.php?mode=alratesearch" method="post">
         <h5 style="text-decoration:underline; text-align:center;">Search for an Airline based on the average rating</h5>
         <div class="form-row">
             <div class="col-md-6 offset-md-3 mb-3">

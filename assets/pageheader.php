@@ -24,6 +24,36 @@
             height:600px;
             float:left;
         }
+        
+        .stars {
+            display: inline-block;
+        }
+
+        .stars input {
+            display: none;
+        }
+
+        .stars label {
+            float: right;
+            padding: 2px;
+            font-size: 40px;
+            color: #444;
+            transition: all .2s;
+        }
+
+        .stars label:before {
+            content: '\2605';
+        }
+
+        .stars input:checked ~ label:before {
+            color: gold;
+            transition: all .25s;
+        }
+
+        .stars label:hover {
+            transform: scale(1.3);
+        }
+
     </style>
 </head>
 <body>
@@ -37,8 +67,8 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

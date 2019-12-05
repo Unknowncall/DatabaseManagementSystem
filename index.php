@@ -18,10 +18,9 @@ switch ($review) {
         $rating = $_POST["rating"];
         $airportid = '';
         if (isset($_GET['id'])) {$airportid = $_GET['id'];}
-        $sql = "INSERT INTO `airport_reviews` (`airport_id`, `rating`, `review_id`) VALUES ('{$airportid}', '{$rating}', NULL)";
+       $sql = "INSERT INTO `airport_reviews` (`airport_id`, `rating`, `review_id`) VALUES ('{$airportid}', '{$rating}', NULL)";
         executeSQL($sql, $db, null);
-            
-            
+             
             $sql = "SELECT * FROM `airports` WHERE airport_id = {$airportid}";
             $dataList   = getOneRecord($sql, $db, null);
             
