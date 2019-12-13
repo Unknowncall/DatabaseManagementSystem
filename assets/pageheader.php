@@ -60,7 +60,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="index.php"><i class="fas fa-plane-departure" style="padding-right:5px;"></i>Airport Database</a>
+                <a class="navbar-brand" href="index.php"><i class="fas fa-plane-departure" style="padding-right:5px;"></i>Aviation Database</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>

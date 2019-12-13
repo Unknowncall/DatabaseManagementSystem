@@ -36,11 +36,11 @@
             </div>
             <div class="col-md-3 mb-3">
                 <label>Latitude<sup>*</sup></label>
-                <input type="number" class="form-control" placeholder="Latitude" name="lat" required>
+                <input type="text" class="form-control" placeholder="Latitude" name="lat" required>
             </div>
             <div class="col-md-3 mb-3">
                 <label>Longitude<sup>*</sup></label>
-                <input type="number" class="form-control" placeholder="Longitude" name="long" required>
+                <input type="text" class="form-control" placeholder="Longitude" name="long" required>
             </div>
             <div class="col-md-3 mb-3">
                 <label>Altitude (ft)</label>
